@@ -263,6 +263,8 @@ function(boost_modular_build)
 
     if(VCPKG_PLATFORM_TOOLSET MATCHES "v14.")
         list(APPEND _bm_OPTIONS toolset=msvc)
+    elseif(VCPKG_PLATFORM_TOOLSET MATCHES "v120")
+        list(APPEND _bm_OPTIONS toolset=msvc)
     elseif(VCPKG_PLATFORM_TOOLSET MATCHES "external")
         list(APPEND _bm_OPTIONS toolset=gcc)
     else()
@@ -349,6 +351,7 @@ function(boost_modular_build)
         get_filename_component(DIRECTORY_OF_LIB_FILE ${LIB} DIRECTORY)
         string(REPLACE "libboost_" "boost_" NEW_FILENAME ${OLD_FILENAME})
         string(REPLACE "-s-" "-" NEW_FILENAME ${NEW_FILENAME}) # For Release libs
+        string(REPLACE "-vc120-" "-vc140-" NEW_FILENAME ${NEW_FILENAME}) # To merge VS2017 and VS2013 binaries
         string(REPLACE "-vc141-" "-vc140-" NEW_FILENAME ${NEW_FILENAME}) # To merge VS2017 and VS2015 binaries
         string(REPLACE "-vc142-" "-vc140-" NEW_FILENAME ${NEW_FILENAME}) # To merge VS2019 and VS2015 binaries
         string(REPLACE "-sgd-" "-gd-" NEW_FILENAME ${NEW_FILENAME}) # For Debug libs
